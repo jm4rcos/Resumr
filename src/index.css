@@ -1,0 +1,31 @@
+@font-face {
+  font-family: 'Poppins';
+  font-weight: 300;
+  src: local('Poppins'), url(../public/fonts/Poppins-Regular.otf) format('opentype');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-weight: 600;
+  src: local('Poppins'), url(../public/fonts/Poppins-Bold.otf) format('opentype');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-weight: 200;
+  src: local('Poppins'), url(../public/fonts/Poppins-Thin.otf) format('opentype');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-weight: 400;
+  src: local('Poppins'), url(../public/fonts/Poppins-Medium.otf) format('opentype');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style:  italic;
+  src: local('Poppins'), url(../public/fonts/Poppins-MediumItalic.otf) format('opentype');
+}
+*{
+    font-family: 'Poppins';
+    box-sizing: 'border-box';
+    margin: 0;
+    padding: 0;
+}
