@@ -60,7 +60,7 @@ export const expInput = [
 ];
 
 export const educationInput = [
-  {
+  [{
     name: "course",
     placeholder: "Course",
     // style: { gridColumn: "1/3", gridRow: "1" },
@@ -69,5 +69,19 @@ export const educationInput = [
     name: "schoolName",
     placeholder: "School Name",
     // style: { gridColumn: "1/3", gridRow: "2" },
-  },
+  }]
 ];
+
+export const skillInput = [[
+  {
+    name: "skill",
+    placeholder: "Skill",
+    // style: { gridColumn: "1/3", gridRow: "1" },
+  },
+]];
+export const langInput = [[
+  {
+    name: "lang",
+    placeholder: "Language",
+  },
+]];

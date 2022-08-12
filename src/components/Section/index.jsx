@@ -27,6 +27,7 @@ export default function Section({
   selectFile,
   onDelete,
   sectionItem,
+  addExp,
   ...rest
   })
   {
@@ -42,25 +43,12 @@ export default function Section({
         inputData.push({
           name: objName,
           placeholder: objPlaceholder,
-          style: { gridColumn: "1/3", gridRow: "5" },
+          style: { gridColumn: "1/3", gridRow: "6" },
         });
-      }
-      if (objName === "newExp") {
-        // setData(inputData.push(inputData))
-
-        // console.log(data, "exp!! aqui");
       }
 
       // return console.log(inputData);
     }
-
-    // function handleDelete(section){
-    //   console.log(section);
-    // }
-
-    // useEffect(() => {
-    //   console.log("mudou");
-    // },[updateInputData])
 
     return (
       <>
@@ -77,14 +65,15 @@ export default function Section({
             <div>
               <Button
                 // type="submit"
-                // onClick={() => {
-                //   handleAdd(newInstance, newInputPlaceholder)
+                // addItem={() => {
+                //   handleAdd(newInstance, newInputPlaceholder);
                 //   setUpdateInputData(!updateInputData);
                 // }}
                 onClick={onClick}
                 model="outline"
                 content={buttonContent}
                 width="100%"
+                addExp={addExp}
                 // align="flex-start"
                 icon={<BsPlusLg />}
               />
@@ -118,11 +107,14 @@ export default function Section({
             <div style={{ width: "100%", gridColumn: "3/5" }}>
               <Button
                 // type="submit"
-                // onClick={() => {
-                // handleAdd(newInstance, newInputPlaceholder)
-                // setUpdateInputData(!updateInputData);
-                // }}
-                onClick={onClick}
+                onClick={
+                  newInstance === "newInfo"
+                    ? () => {
+                        handleAdd(newInstance, newInputPlaceholder);
+                        setUpdateInputData(!updateInputData);
+                      }
+                    : onClick
+                }
                 model="add"
                 content={buttonContent}
                 width="100%"

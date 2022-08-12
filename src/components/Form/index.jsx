@@ -1,40 +1,80 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Form as Unform } from "@unform/web";
 import { colors } from "../../themes/colors";
 import Section from "../Section";
-import { infoInput, expInput, educationInput } from "../Section/inputs";
-import { v4 as UUID } from "uuid";
+import {
+  infoInput,
+  expInput,
+  educationInput,
+  skillInput,
+  langInput
+} from "../Section/inputs";
 
 export default function Form() {
   const [experiences, setExperiences] = useState([]);
-  // const [selectedSection, setSelectedSection] = useState();
+  const [educations, setEducations] = useState([]);
+  const [skill, setSkill] = useState([]);
+  const [langs, setLangs] = useState([]);
+
+  const [formData, setFormData] = useState([]);
+  const formRef = useRef(null);
+  
+
   const handleAddExperience = () => {
-    setExperiences([
-      ...experiences,expInput[0]
-    ]);
-  }
-function handleSubmit(data) {
-    console.log(data, "data");
-  }
-  const handleDeleteSection = (section) => {
-    const index = experiences.indexOf(section);
-    if(index !== -1) {
-      experiences.splice(index, 1);
-    }
-    console.log(experiences, "experiences");
+    setExperiences([...experiences, expInput[0]]);
+  };
+
+  const handleAddEducation = () => {
+    setEducations([...educations, educationInput[0]]);
+  };
+
+  const handleAddSkill = () => {
+    setSkill([...skill, skillInput[0]]);
+  };
+
+  const handleAddLanguage = () => {
+    setLangs([...langs, langInput[0]]);
+  };
+  
+  function handleSubmit(data, { reset }) {
+    // setFormData([...formData, data]);
+    // console.log(formData, "formData");
+
+    console.log(data, "formRef data!");
+
+    // reset()
   }
 
-  // useEffect(() => {
-  //   console.log(experiences , "expInput!!"); 
-  // }, [experiences]);
+  const handleDeleteExp = (section) => {
+    const newArr = experiences.slice();
+    newArr.splice(section, 1);
+    setExperiences(newArr);
+  };
+  const handleDeleteEducation = (section) => {
+    const newArr = educations.slice();
+    newArr.splice(section, 1);
+    setEducations(newArr);
+  };
+  const handleDeleteSkill = (section) => {
+    const newArr = skill.slice();
+    newArr.splice(section, 1);
+    setSkill(newArr);
+  };
+  const handleDeleteLanguage = (section) => {
+    const newArr = langs.slice();
+    newArr.splice(section, 1);
+    setLangs(newArr);
+  };
 
   return (
     <Unform
+      // initialData={initialData}
+      ref={formRef}
       className="unform"
       onSubmit={handleSubmit}
       style={{
-        width: "600px",
-        maxWidth: "600px",
+        width: "650px",
+        maxWidth: "650px",
         maxHeight: "700px",
         overflow: "auto",
         borderRadius: "10px",
@@ -46,7 +86,7 @@ function handleSubmit(data) {
         style={{
           backgroundColor: colors.light,
           borderRadius: "10px",
-          padding: "20px 30px 0px 30px",
+          padding: "20px 40px 0px 30px",
           position: "relative",
         }}
       >
@@ -69,7 +109,7 @@ function handleSubmit(data) {
           onClick={handleAddExperience}
           addButton
         />
-        {experiences.map((exp, index) => {
+        {experiences.map((item, index) => {
           return (
             <Section
               key={index}
@@ -77,9 +117,10 @@ function handleSubmit(data) {
               path={`exp${index + 2}`}
               inputData={experiences[0]}
               buttonContent="Add Experience"
+              newInstance="newExp"
               // newInstance="newExp"
               deleteSectionIcon
-              onDelete={() => handleDeleteSection(exp)}
+              onDelete={() => handleDeleteExp(item)}
             />
           );
         })}
@@ -87,95 +128,89 @@ function handleSubmit(data) {
         <Section
           name="Education"
           path="education"
-          inputData={educationInput}
+          inputData={educationInput[0]}
           buttonContent="Add Education"
+          newInstance="newEducation"
+          newInputPlaceholder="School Name"
           addButton
+          onClick={handleAddEducation}
         />
-        {/* <Container col={"repeat(4, 1fr)"} row={"repeat(4, 1fr)"}>
-          ///
-          <div style={{ width: "100%", gridColumn: "1/3", gridRow: "4" }}>
-            <Button
-              type="submit"
-              onClick={handleSubmit}
-              model="add"
-              content="Add Experience"
-              width="100%"
+        {educations.map((item, index) => {
+          return (
+            <Section
+              key={index}
+              name={`Education ${index + 2}`}
+              path={`education${index + 2}`}
+              inputData={educations[0]}
+              buttonContent="Add Experience"
+              newInstance="newEducation"
+              // newInstance="newExp"
+              deleteSectionIcon
+              onDelete={() => handleDeleteEducation(item)}
             />
-          </div>
-        </Container> */}
-        {/* <Text content="Education" type="title" /> */}
-        {/* <Container col={"repeat(4, 1fr)"} row={"1fr"}>
-          <Input
-            name="education.course"
-            placeholder="Complete High School"
-            style={{ gridColumn: "1/3", gridRow: "1" }}
-          />
-          <Input
-            name="education.school_name"
-            placeholder="School Name"
-            style={{ gridColumn: "3/5", gridRow: "1" }}
-          />
+          );
+        })}
 
-          <div style={{ width: "100%", gridColumn: "1/3", gridRow: "2" }}>
-            
-            <Button
-              type="submit"
-              onClick={handleSubmit}
-              model="add"
-              content="Add Education"
-              width="100%"
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(2, 1fr)",
+            gap: "1rem 1.5rem",
+          }}
+        >
+          <div>
+            <Section
+              name="Skills"
+              path="skill"
+              inputData={skillInput[0]}
+              buttonContent="Add Skill"
+              newInstance="newSkill"
+              addButton
+              onClick={handleAddSkill}
             />
+            {skill.map((item, index) => {
+              return (
+                <Section
+                  name={`Skill ${index + 2}`}
+                  key={index}
+                  path={`skill${index + 2}`}
+                  inputData={skill[0]}
+                  buttonContent="Add New skill"
+                  newInstance="newSkill"
+                  // newInstance="newExp"
+                  deleteSectionIcon
+                  onDelete={() => handleDeleteSkill(item)}
+                />
+              );
+            })}
           </div>
-        </Container> */}
-        {/* <Container col={"repeat(2, 1fr)"} row={"repeat(3, 1fr)"}>
-          ///
-          <div style={{ width: "100%", gridColumn: "1/2", gridRow: "1" }}>
-            
-            <Text
-              content="Skills"
-              type="title"
-              style={{ gridColumn: "1/2", gridRow: "1" }}
+          <div>
+            <Section
+              name="Languages"
+              path="language"
+              inputData={langInput[0]}
+              buttonContent="Add Language"
+              newInstance="newLang"
+              onClick={handleAddLanguage}
+              addButton
             />
+            {langs.map((item, index) => {
+              return (
+                <Section
+                  key={index}
+                  name={`Language ${index + 2}`}
+                  path={`lang${index + 2}`}
+                  inputData={langs[0]}
+                  buttonContent="Add New skill"
+                  newInstance="newSkill"
+                  // newInstance="newExp"
+                  deleteSectionIcon
+                  onDelete={() => handleDeleteLanguage(item)}
+                />
+              );
+            })}
           </div>
-          <Input
-            name="skill.name"
-            placeholder="Skill one"
-            style={{ gridColumn: "1/2", gridRow: "2" }}
-          />
-          <div style={{ width: "100%", gridColumn: "1/2", gridRow: "3" }}>
-            
-            <Button
-              type="submit"
-              onClick={handleSubmit}
-              model="add"
-              content="Add Skill"
-              width="100%"
-            />
-          </div>
-          ///
-          <div style={{ width: "100%", gridColumn: "2/3", gridRow: "1" }}>
-            
-            <Text
-              content="Skills"
-              type="title"
-              style={{ gridColumn: "1/2", gridRow: "1" }}
-            />
-          </div>
-          <Input
-            name="language.name"
-            placeholder="English"
-            style={{ gridColumn: "2/3", gridRow: "2" }}
-          />
-          <div style={{ width: "100%", gridColumn: "2/3", gridRow: "3" }}>
-            <Button
-              type="submit"
-              onClick={handleSubmit}
-              model="add"
-              content="Add Language"
-              width="100%"
-            />
-          </div>
-        </Container> */}
+        </div>
       </div>
     </Unform>
   );
