@@ -1,128 +1,90 @@
 import React, { useState, useEffect } from "react";
-import Button from "../Button";
-import Input from "../Input";
-import Text from "../Text";
-import TextArea from "../TextArea";
-import { Container } from "./styles";
-import { Scope } from "@unform/core";
-import { v1 as UUID } from 'uuid'
-import { HiOutlineTrash } from 'react-icons/hi'
-import { BsPlusLg } from 'react-icons/bs'
-import { colors } from "../../themes/colors";
+import { v4 } from "uuid";
+import Provider from "./Provider";
 
 export default function Section({
-  name,
-  content,
-  col,
-  row,
-  path,
-  inputData,
-  buttonContent,
-  onClick,
-  newInstance,
-  newInputPlaceholder,
-  deleteSectionIcon,
-  addButton,
-  buttonType,
-  selectFile,
-  onDelete,
-  sectionItem,
-  addExp,
+
+  updateData,
+  setUpdateData,
+  index,
+  getData,
+  id,
+  type,
   ...rest
-  })
-  {
-    // const [personalInfo, setPersonalInfo] = useState([
+}) {
+  const [data, setData] = useState([]);
 
-    // ]); 
-    const [data, setData] = useState([])
-
-    const [updateInputData, setUpdateInputData] = useState(false);
-
-    function handleAdd(objName, objPlaceholder) {
-      if (objName === "newInfo" && inputData.length <= 6) {
-        inputData.push({
-          name: objName,
-          placeholder: objPlaceholder,
-          style: { gridColumn: "1/3", gridRow: "6" },
-        });
+  useEffect(() => {
+    const newData = [
+      {
+        id: v4(),
+        name: getData.name,
+        input: getData.input
       }
+    ]
 
-      // return console.log(inputData);
+    // setData(getData);
+    // console.log(getData);
+    // setUpdateData(!updateData);
+    // eslint-disable-next-line
+  }, []);
+
+  function handleAddSection(section) {
+    const newSection = {
+      id: v4(),
+      name: section.name,
+      input: section.input
     }
+    // console.log(newSection, "new");
+    console.log(section);
 
-    return (
-      <>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <Text content={name} type="title" />
-          {deleteSectionIcon && (
-            <HiOutlineTrash
-              size={24}
-              onClick={onDelete}
-              style={{ cursor: "pointer" }}
-            />
-          )}
-          {addButton && (
-            <div>
-              <Button
-                // type="submit"
-                // addItem={() => {
-                //   handleAdd(newInstance, newInputPlaceholder);
-                //   setUpdateInputData(!updateInputData);
-                // }}
-                onClick={onClick}
-                model="outline"
-                content={buttonContent}
-                width="100%"
-                addExp={addExp}
-                // align="flex-start"
-                icon={<BsPlusLg />}
-              />
-            </div>
-          )}
-        </div>
-        <Container col={col} row={row}>
-          <Scope path={path}>
-            {inputData?.map((info) => {
-              if (info.name === "about" || info.name === "responsabilities") {
-                return (
-                  <TextArea
-                    key={UUID()}
-                    name={info.name || info[0].name}
-                    placeholder={info.placeholder}
-                    style={info.style}
-                  />
-                );
-              }
-              return (
-                <Input
-                  key={UUID()}
-                  name={info.name || info[0].name}
-                  placeholder={info.placeholder}
-                  style={info.style}
-                />
-              );
-            })}
-          </Scope>
-          {selectFile && (
-            <div style={{ width: "100%", gridColumn: "3/5" }}>
-              <Button
-                // type="submit"
-                onClick={
-                  newInstance === "newInfo"
-                    ? () => {
-                        handleAdd(newInstance, newInputPlaceholder);
-                        setUpdateInputData(!updateInputData);
-                      }
-                    : onClick
-                }
-                model="add"
-                content={buttonContent}
-                width="100%"
-                type={buttonType}
-              />
-            </div>
-          )}
-        </Container>
-      </>
-    );
+    // setData({ ...data, data[experiencies, novaExperiencia]} })
+
+    // const arr = [];
+    // arr.push(section);
+    // data.input.push(section);
+    // setUpdateData(!updateData);
   }
+
+  function handleDeleteSection(section, index) {
+    // data.input.splice(index, 1);
+    const filteredData = data.input.filter((item, i) => (console.log(section)));
+
+    console.log(filteredData);
+
+    // setData({ name: "Skills", input: [...filteredData]});
+    // console.log(filteredData);
+    // console.log(data.input, "data");
+
+    // setData({...data, input: filteredData});
+
+    // console.log(data);
+
+    // console.log({ input: { ...filteredData } },  name: "Skills" );
+
+    // setData([ {input: { ...filteredData }}, {name: "Skills"} ]);
+
+
+    setUpdateData(!updateData);
+  }
+
+  return (
+    <div>
+      {data.name === type &&
+        data.input.map((item, i) => {
+          return (
+            <Provider
+              key={i}
+              index={i}
+              data={item}
+              type={data.name}
+              onAdd={() => handleAddSection(item)}
+              onDelete={() => handleDeleteSection(item, i)}
+              setUpdateData={setUpdateData}
+              updateData={updateData}
+            />
+          );
+        })}
+    </div>
+  );
+}

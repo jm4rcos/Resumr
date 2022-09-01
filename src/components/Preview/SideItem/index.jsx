@@ -15,14 +15,14 @@ export function SideItem({ type, name, value, mb, mt, long, textMt, textMb }) {
         content={type}
         type="title"
         color={colors.title}
-        mb={6}
-        size="96%"
+        mb={4}
+        size="86%"
       />
-      <Text content={name} type="text" color={colors.text} size="86%" />
+      <Text content={name} type="text" color={colors.text} size="76%" />
       <Text
         content={value}
         type="text"
-        size="72%"
+        size="62%"
         color={colors.placeholder}
         mb={textMb}
       />
@@ -31,7 +31,7 @@ export function SideItem({ type, name, value, mb, mt, long, textMt, textMb }) {
         content={long}
         type="text"
         color={colors.text}
-        size="84%"
+        size="74%"
         mb={textMb}
       />
     </div>

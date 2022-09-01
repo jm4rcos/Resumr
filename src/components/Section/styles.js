@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   display: grid;
-  /* place-items: center; */
 
   ${(props) => css`
     grid-template-columns: ${props.col};

@@ -14,4 +14,7 @@ export const colors = {
   shadowBlue: "#B2D6F1",
   shadowGreen: "#A1EBC8",
   shadowWhite: "#D9D9D9",
+  shadowRed: "##e05a8a",
+
+  border: "rgba(161, 235, 200, 0.5)",
 };

@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { colors } from "../../themes/colors";
+import { colors } from "../../../themes/colors";
 
 export const Container = styled.div`
   background-color: ${colors.light};

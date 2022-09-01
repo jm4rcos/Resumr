@@ -11,6 +11,7 @@ export default function Button(props, {...rest}) {
       disabled={props.disabled}
       {...rest}
       onClick={props.onClick}
+      type={props.type}
     >
       {props.icon}
       <Text content={props.content} align={props.align}/>

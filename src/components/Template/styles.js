@@ -32,12 +32,15 @@ export const Container = styled.div`
 
 export const Header = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   width: 100%;
+  background-color: lightblue;
 
   position: relative;
-  padding-bottom: 30px;
+  gap: 6px;
+  padding-bottom: 20px;
 `;
 
 export const Line = styled.div`

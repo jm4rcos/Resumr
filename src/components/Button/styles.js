@@ -14,12 +14,11 @@ export const StyledButton = styled.button`
   align-items: center;
   justify-content: center;
   gap: 10px;
-  width: 160px;
 
   ${(props) =>
     props.width &&
     css`
-      width: ${props.width};
+      width: ${props.width || "100%"};
     `}
 
   ${(props) =>
@@ -34,6 +33,13 @@ export const StyledButton = styled.button`
     css`
       background-color: ${colors.success};
       box-shadow: 0px 10px 25px ${colors.shadowGreen};
+    `}
+
+    ${(props) =>
+    props.model === "danger" &&
+    css`
+      background-color: ${colors.danger};
+      box-shadow: 0px 10px 25px ${colors.shadowRed};
     `}
 
     ${(props) =>

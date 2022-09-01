@@ -4,9 +4,11 @@ import { colors } from '../../themes/colors';
 export const Container = styled.div`
   background-color: ${colors.background};
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
   margin-top: 5em;
+  position: relative;
 
   height: 100vh;
   width: 100%;
@@ -14,7 +16,6 @@ export const Container = styled.div`
   padding: 0em 30px;
 
   overflow: "hidden";
-  
 
   @media (max-width: 768px) {
     display: none;

@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { colors } from "../../themes/colors";
+import { colors } from "../../../themes/colors";
 
 export const Container = styled.div`
   background-color: ${colors.light};
@@ -32,24 +32,14 @@ export const Container = styled.div`
 
 export const Header = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   width: 100%;
 
   position: relative;
-  padding-bottom: 30px;
-`;
-
-export const Line = styled.div`
-  ${(props) =>
-    props.type === "horizontal" &&
-    css`
-      color: ${colors.title};
-      font-weight: ${props.weight || "500"};
-      font-size: ${props.size || "20px"};
-      height: 10px;
-      wid
-    `}
+  gap: 6px;
+  padding-bottom: 20px;
 `;
 
 export const Side = styled.div`
@@ -70,10 +60,7 @@ export const Side = styled.div`
 `;
 
 export const Content = styled.div`
-  display: grid;
-  grid-template-columns: 1.4fr 2fr;
 
   height: 100%;
   width: 100%;
-  /* background-color: ${colors.primary}; */
 `;
